@@ -14,7 +14,6 @@ def load_data():
     sheet_id = "1veX2JY-ovYpubeXf2-uln7pK93Sq8vJT"
     sheet_name = "Resumen L1"
 
-
     # URL de exportación a formato Excel
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx"
 
@@ -62,82 +61,134 @@ def main():
     st.markdown(
         """
         <style>
-            .stButton>button {
-                background-color: #4CAF50; 
-                color: white; 
-                border-radius: 5px; 
-                padding: 10px 20px;
+            body {
+                background-color: #f0f4f8;
             }
-            .stDownloadButton>button {
-                background-color: #FF5733;
+            .stButton>button {
+                background-color: #FF5733; /* Naranja */
                 color: white;
                 border-radius: 5px;
-                padding: 10px 20px;
+                padding: 15px 20px;
+                font-size: 16px;
+                width: 100%;
+            }
+            .stDownloadButton>button {
+                background-color: #1D428A; /* Azul */
+                color: white;
+                border-radius: 5px;
+                padding: 15px 20px;
+                font-size: 16px;
+                width: 100%;
             }
             .stMarkdown h1 {
-                color: #2E8B57;
+                color: #1D428A; /* Azul */
+                font-family: 'Arial', sans-serif;
+                font-size: 36px;
+                text-align: left;
+            }
+            .stMarkdown h3 {
+                color: #FF5733; /* Naranja */
+                font-size: 24px;
+                font-weight: bold;
+            }
+            .logo {
+                width: 150px; /* Tamaño adecuado */
+                height: auto;
+                display: block;
+                margin-left: 0;
+                margin-right: 20px;
+            }
+            .result-card {
+                background-color: #ffffff;
+                padding: 15px;
+                border-radius: 8px;
+                box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+                margin-bottom: 15px;
+                border: 1px solid #ddd;
+            }
+            .result-card h4 {
+                color: #1D428A; /* Azul */
+                font-size: 18px;
+            }
+            .result-card p {
+                color: #555;
+                font-size: 14px;
+            }
+            .result-card .score {
+                color: #FF5733; /* Naranja */
+                font-weight: bold;
+            }
+            .result-card .description {
+                color: #1D428A; /* Azul */
+            }
+            .button-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
             }
         </style>
         """,
         unsafe_allow_html=True
     )
 
-    st.title("🌟 Buscador de ONGs Relevantes")
-    st.markdown(
-        """
-        #### Bienvenido al Buscador de ONGs 🌍  
-        Encuentra las organizaciones más relevantes para tus necesidades.  
-        Solo ingresa una descripción y nosotros haremos el resto.  
-        ---
-        """
-    )
+    # Contenedor de columnas para alinear el logo a la izquierda del título
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        # Logo de OLI redimensionado y alineado a la izquierda
+        st.image("Assets/LOGO_Oli.png", use_container_width=True)
+    with col2:
+        st.title("🌟 Buscador de ONGs Relevantes")
+        st.markdown(
+            """
+            #### Encuentra las organizaciones más relevantes para tus necesidades.  
+            #### Solo ingresa una descripción y nosotros haremos el resto.  
+            --- 
+            """
+        )
 
-    # Botón para actualizar la base de datos
-    with st.sidebar:
-        st.header("🔄 Configuración")
-        if st.button("Actualizar Base de Datos"):
+    # Contenedor de columnas para los botones y la descripción
+    col1, col2 = st.columns([2, 1])  # La columna para la descripción toma el doble de espacio
+    with col1:
+        description = st.text_area(
+            "Describe la organización o necesidad que estás buscando:",
+            placeholder="Ejemplo: Busco una organización que trabaje con mujeres en áreas rurales.",
+            height=150
+        )
+        # Campo para el número de resultados que el usuario desea ver
+        top_n = st.number_input("Número de resultados a mostrar:", min_value=1, max_value=20, value=5, step=1)
+
+    with col2:
+        button1 = st.button("Buscar ONGs")
+        button2 = st.button("Actualizar Base de Datos")
+
+        # Si se presiona "Actualizar Base de Datos"
+        if button2:
             st.cache_data.clear()
             st.success("Base de datos actualizada correctamente.")
-
-    # Cargar los datos y modelo
-    sheet_resumen_l1 = load_data()
-    model = load_model()
-
-    # Embeddings precomputados
-    combined_texts = sheet_resumen_l1['COMBINED_TEXT'].tolist()
-    ong_names = sheet_resumen_l1['ONG'].tolist()
-    embeddings = model.encode(combined_texts, convert_to_tensor=True)
-
-    # Entrada del usuario
-    st.subheader("🔍 Buscar ONGs")
-    description = st.text_area(
-        "Describe la organización o necesidad que estás buscando:",
-        placeholder="Ejemplo: Busco una organización que trabaje con mujeres en áreas rurales."
-    )
-
-    # Selección del Top N
-    top_n = st.number_input(
-        "Selecciona cuántas ONGs relevantes deseas (Top N):",
-        min_value=1,
-        max_value=50,
-        value=5,
-        step=1
-    )
-
-    # Buscar ONGs relevantes
-    if st.button("Buscar ONGs"):
+            
+    # Si se presiona "Buscar ONGs", buscar las organizaciones más relevantes
+    if button1:
         if description.strip() != "":
-            similar_ongs = find_similar_ongs(description, embeddings, ong_names, combined_texts, model, top_n=top_n)
-            st.markdown("### Resultados más relevantes:")
+            # Cargar los datos y el modelo
+            sheet_resumen_l1 = load_data()
+            model = load_model()
+
+            # Embeddings precomputados
+            combined_texts = sheet_resumen_l1['COMBINED_TEXT'].tolist()
+            ong_names = sheet_resumen_l1['ONG'].tolist()
+            embeddings = model.encode(combined_texts, convert_to_tensor=True)
+
+            similar_ongs = find_similar_ongs(description, embeddings, ong_names, combined_texts, model, top_n)
+            st.markdown(f"### Resultados más relevantes ({top_n} ONGs):")
             st.markdown("---")
 
             results = []
             for ong in similar_ongs:
                 st.markdown(f"""
-                <div style="background-color:#f9f9f9;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ddd;">
-                    <strong>🏢 ONG:</strong> {ong['ONG']}<br>
-                    <strong>📊 Puntaje:</strong> {ong['Score']:.4f}<br>
-                    <strong>📝 Descripción:</strong> {ong['Description']}
+                <div class="result-card">
+                    <h4>🏢 ONG: {ong['ONG']}</h4>
+                    <p class="score"><strong>📊 Puntaje:</strong> {ong['Score']:.4f}</p>
+                    <p class="description"><strong>📝 Descripción:</strong> {ong['Description']}</p>
                 </div>
                 """, unsafe_allow_html=True)
                 results.append(ong)
