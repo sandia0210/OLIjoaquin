@@ -137,7 +137,7 @@ def main():
         # Logo de OLI redimensionado y alineado a la izquierda
         st.image("Assets/LOGO_Oli.png", use_container_width=True)
     with col2:
-        st.title("🌟 Buscador de ONGs Relevantes")
+        st.title("🔍 Buscador de ONGs Relevantes")
         st.markdown(
             """
             #### Encuentra las organizaciones más relevantes para tus necesidades.  
