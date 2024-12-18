@@ -176,6 +176,9 @@ def main():
     st.markdown("<h3 style='color: #001d57;'>↻ Filtros Iniciales</h3>", unsafe_allow_html=True)
     comunidades_seleccionadas = st.multiselect(
         "Seleccione el tipo de población beneficiaria:",
+
+        options=df["Tipo de comunidad/población más beneficiado por las actividades de la organización"].unique().tolist(),
+       """
         options=[
             "Comunidades por condiciones económicas y de acceso a servicios (como servicios tomar en cuenta: educación, agua, alimentos, etc.)",
             "Comunidades por ubicación geográfica y cultural (población afrodescendiente, migrante o en zona de invasión)",
@@ -184,6 +187,7 @@ def main():
             "Personas con discapacidades (física, sensorial, neurológica, etc.)",
             "Animales (en abandono o víctimas de tráfico ilegal)"
         ],
+        """
         placeholder='Selecciona una o varias opciones'
     )
     departamentos_seleccionados = st.multiselect(
