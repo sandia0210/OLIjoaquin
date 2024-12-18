@@ -40,13 +40,8 @@ def load_data():
     )
 
     # Combinar prioridades en una sola columna
-    prioridad_cols = [
-        'Prioridad 1', 'Prioridad 2', 'Prioridad 3', 'Prioridad 1.1',
-        'Prioridad 2.1', 'Prioridad 3.1', 'Prioridad 1.2', 'Prioridad 2.2',
-        'Prioridad 3.2', 'Prioridad 1.3', 'Prioridad 2.3', 'Prioridad 3.3',
-        'Prioridad 1.4', 'Prioridad 2.4', 'Prioridad 3.4', 'Prioridad 1.5',
-        'Prioridad 2.5', 'Prioridad 3.5'
-    ]
+    prioridad_cols = [col for col in df.columns if col.startswith('Prioridad')]
+
     df['PRIORIDADES'] = (
         df[prioridad_cols]
         .apply(lambda row: ' '.join(row.dropna().astype(str)), axis=1)
