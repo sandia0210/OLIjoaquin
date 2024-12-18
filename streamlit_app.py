@@ -204,7 +204,7 @@ def main():
         return
 
     combined_texts = df_filtrado['COMBINED_TEXT'].tolist()
-    ong_names = df_filtrado['Nombre de la iniciativa/Organización'].tolist()
+    ong_names = df_filtrado['Nombre de la Iniciativa/Organización'].tolist()
     embeddings = model.encode(combined_texts, convert_to_tensor=True)
 
     st.markdown("<h3 style='color: #001d57;'>🔍 Buscar ONGs</h3>", unsafe_allow_html=True)
