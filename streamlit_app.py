@@ -178,16 +178,6 @@ def main():
         "Seleccione el tipo de población beneficiaria:",
 
         options=df["Tipo de comunidad/población más beneficiado por las actividades de la organización"].unique().tolist(),
-       """
-        options=[
-            "Comunidades por condiciones económicas y de acceso a servicios (como servicios tomar en cuenta: educación, agua, alimentos, etc.)",
-            "Comunidades por ubicación geográfica y cultural (población afrodescendiente, migrante o en zona de invasión)",
-            "Grupos por edad (niños o adultos mayores en situación de vulnerabilidad)",
-            "Grupos por genero (madres o mujeres desprotegidas, miembros de la comunidad LGBT+, etc.)",
-            "Personas con discapacidades (física, sensorial, neurológica, etc.)",
-            "Animales (en abandono o víctimas de tráfico ilegal)"
-        ],
-        """
         placeholder='Selecciona una o varias opciones'
     )
     departamentos_seleccionados = st.multiselect(
