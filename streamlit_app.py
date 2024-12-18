@@ -12,7 +12,7 @@ st.set_page_config(page_title="Buscador de ONGs", page_icon="🌍", layout="wide
 @st.cache_data
 def load_data():
     sheet_id = "1mrCQubiQSk_Ilv9a5gbezH_zyu81DjCr_G1sBHZ93Lg"
-    sheet_name = "Sheet1"
+    sheet_name = "Respuestas de formulario 1"
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx"
     df = pd.read_excel(url, sheet_name=sheet_name, engine='openpyxl')
 
