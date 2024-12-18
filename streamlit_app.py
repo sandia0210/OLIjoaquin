@@ -11,7 +11,7 @@ st.set_page_config(page_title="Buscador de ONGs", page_icon="🌍", layout="wide
 # Función para cargar datos desde Google Sheets
 @st.cache_data
 def load_data():
-    sheet_id = "13wWdtnby79qJfN3QbIQypCDhgxrGVZXm"
+    sheet_id = "1mrCQubiQSk_Ilv9a5gbezH_zyu81DjCr_G1sBHZ93Lg"
     sheet_name = "Sheet1"
     url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/export?format=xlsx"
     df = pd.read_excel(url, sheet_name=sheet_name, engine='openpyxl')
