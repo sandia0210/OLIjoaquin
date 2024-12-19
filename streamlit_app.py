@@ -232,7 +232,7 @@ def main():
                     Departamentos = ', '.join(ong_data['Departamentos_lista'])
                     Objetivo_Largo_Plazo=ong_data['OBJETIVO_LARGO'] 
                     Objetivo_Corto_Plazo=ong_data['OBJETIVO_CORTO']
-                    Aporte_Crecimiento=ong_data['¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)]
+                    Aporte_Crecimiento=ong_data['¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']
                     
                     card_content = f"""
                     <div style="background-color:#f9f9f9;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ddd; border-left: 5px solid transparent; background-image: linear-gradient(to right, #001d57 5px, #f9f9f9 5px);">
