@@ -53,8 +53,8 @@ def load_data():
     df['DESCRIPCION'] = df['En 50 palabras o menos, por favor, describe el objetivo general de la iniciativa/programa'].fillna("").apply(clean_text)
     df['OBJETIVO_LARGO'] = df['En 50 palabras o menos, por favor, describe el objetivo a largo plazo de la iniciativa/programa'].fillna("").apply(clean_text)
     df['OBJETIVO_CORTO'] = df['En 50 palabras o menos, por favor, describe el objetivo a corto plazo de la iniciativa/programa'].fillna("").apply(clean_text)
-    df['COMBINED_TEXT'] = df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO','¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']].agg(' '.join, axis=1)
-
+    df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO', '¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']] = df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO', '¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']].fillna('')
+    df['COMBINED_TEXT'] = df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO', '¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']].agg(' '.join, axis=1)
     return df
 
 # Función para limpiar texto
