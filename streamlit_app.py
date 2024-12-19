@@ -53,7 +53,7 @@ def load_data():
     df['DESCRIPCION'] = df['En 50 palabras o menos, por favor, describe el objetivo general de la iniciativa/programa'].fillna("").apply(clean_text)
     df['OBJETIVO_LARGO'] = df['En 50 palabras o menos, por favor, describe el objetivo a largo plazo de la iniciativa/programa'].fillna("").apply(clean_text)
     df['OBJETIVO_CORTO'] = df['En 50 palabras o menos, por favor, describe el objetivo a corto plazo de la iniciativa/programa'].fillna("").apply(clean_text)
-    df['COMBINED_TEXT'] = df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO']].agg(' '.join, axis=1)
+    df['COMBINED_TEXT'] = df[['DESCRIPCION', 'OBJETIVO_LARGO', 'OBJETIVO_CORTO','¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']].agg(' '.join, axis=1)
 
     return df
 
@@ -230,7 +230,10 @@ def main():
                     Instagram = ong_data['Instagram']
                     Página_web = ong_data['Página_web']
                     Departamentos = ', '.join(ong_data['Departamentos_lista'])
-
+                    Objetivo_Largo_Plazo=ong_data['OBJETIVO_LARGO'] 
+                    Objetivo_Corto_Plazo=ong_data['OBJETIVO_CORTO']
+                    Aporte_Crecimiento=ong_data['¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)]
+                    
                     card_content = f"""
                     <div style="background-color:#f9f9f9;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ddd; border-left: 5px solid transparent; background-image: linear-gradient(to right, #001d57 5px, #f9f9f9 5px);">
                         <strong style='color:#001d57;'>🏢 ONG:</strong> {ong['ONG']}<br>
@@ -242,6 +245,12 @@ def main():
                         card_content += f"<strong style='color:#001d57;'>🗺️ Departamentos:</strong> {Departamentos}<br>"
                     if pd.notna(Objetivo_General):
                         card_content += f"<strong style='color:#001d57;'>🎯 Objetivo General:</strong> {Objetivo_General}<br>"
+                    if pd.notna(Objetivo_Corto_Plazo):
+                        card_content += f"<strong style='color:#001d57;'>⏰ Objetivo Corto Plazo:</strong> {Objetivo_Corto_Plazo}<br>"
+                    if pd.notna(Objetivo_Largo_Plazo):
+                        card_content += f"<strong style='color:#001d57;'>🚀 Objetivo Largo Plazo:</strong> {Objetivo_Largo_Plazo}<br>"
+                    if pd.notna(Aporte_Crecimiento):
+                        card_content += f'<strong style="color:#001d57;">🤝 Aporte al crecimiento de OLI:</strong> <a href="{Aporte_Crecimiento}" target="_blank">{Aporte_Crecimiento}</a><br>'
                     if pd.notna(Responsable):
                         card_content += f"<strong style='color:#001d57;'>👤 Responsable:</strong> {Responsable}<br>"
                     if pd.notna(Contacto):
@@ -253,6 +262,9 @@ def main():
                     if pd.notna(Página_web):
                         card_content += f'<strong style="color:#001d57;">🌐 Página web:</strong> <a href="{Página_web}" target="_blank">{Página_web}</a><br>'
 
+
+
+                    
                     card_content += "</div>"
 
                     st.markdown(card_content, unsafe_allow_html=True)
@@ -260,6 +272,9 @@ def main():
                     ong['Comunidad'] = comunidad
                     ong['Departamentos'] = Departamentos
                     ong['Objetivo General'] = Objetivo_General
+                    ong['Objetivo Corto Plazo'] = Objetivo_Corto_Plazo
+                    ong['Objetivo Largo Plazo'] = Objetivo_Largo_Plazo
+                    ong['Aporte al crecimiento'] = Aporte_Crecimiento
                     ong['Responsable'] = Responsable
                     ong['Contacto'] = Contacto
                     ong['Facebook'] = Facebook
