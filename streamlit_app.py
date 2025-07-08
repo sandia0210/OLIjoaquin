@@ -104,19 +104,19 @@ def main():
         """
         <style>
             .stButton>button {
-                background-color: #E55200; 
+                background-color: #1071b8; 
                 color: white; 
                 border-radius: 5px; 
                 padding: 10px 20px;
             }
             .stDownloadButton>button {
-                background-color: #E55200;
+                background-color: #4faf34;
                 color: white;
                 border-radius: 5px;
                 padding: 10px 20px;
             }
             .stMarkdown h1 {
-                color: #E55200;
+                color: #4faf34;
             }
         </style>
         """,
@@ -131,7 +131,7 @@ def main():
             font-weight: bold; /* Negrita para destacar */
         }
         .stMultiSelect .st-af { /* Opciones seleccionadas */
-            background-color: #E55200; /* Fondo azul claro */
+            background-color: #4faf34; /* Fondo azul claro */
             color: white; /* Texto azul oscuro */
         }
     </style>
@@ -144,14 +144,14 @@ def main():
     sidebar_style = """
     <style>
         [data-testid="stSidebar"] {
-            background-color: #A8B8C7; /* Fondo azul calmado */
-            color: #002857; /* Texto en azul oscuro */
+            background-color: #ffffff; /* Fondo blanco */
+            color: #936037; /* Texto en marrón */
         }
         [data-testid="stSidebar"] .css-1d391kg {
             color: #002857; /* Color de texto en los inputs */
         }
         [data-testid="stSidebar"] .css-17eq0hr {
-            color: #E55200; /* Color de los títulos al naranja vibrante */
+            color: #4faf34; /* Color de los títulos al naranja vibrante */
         }
     </style>
     """
