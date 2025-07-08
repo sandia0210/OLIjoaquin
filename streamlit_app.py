@@ -151,7 +151,7 @@ def main():
             color: #002857; /* Color de texto en los inputs */
         }
         [data-testid="stSidebar"] .css-17eq0hr {
-            color: #4faf34; /* Color de los títulos al naranja vibrante */
+            color: #4faf34; /* Color de los títulos al verde ser maestro */
         }
     </style>
     """
@@ -159,13 +159,13 @@ def main():
     # Aplicar los estilos en la app
     st.markdown(sidebar_style, unsafe_allow_html=True)
     
-    st.markdown("<h1 style='color: #001d57';'>Buscador de ONGs Relevantes</h1>", unsafe_allow_html=True)
-    st.markdown("<p style='color: #001d57';'>Encuentra las organizaciones más relevantes según tus necesidades.</p>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color: #ffffff';'>Buscador de ONGs Relevantes</h1>", unsafe_allow_html=True)
+    st.markdown("<p style='color: #ffffff';'>Encuentra las organizaciones más relevantes según tus necesidades.</p>", unsafe_allow_html=True)
 
     
     with st.sidebar:
         st.image("Assets/ser_maestro.png", use_container_width=True)
-        st.markdown("<h2 style='color: #001d57';'>↻ Configuración</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='color: #936037';'>↻ Configuración</h2>", unsafe_allow_html=True)
         if st.button("Actualizar Base de Datos"):
             st.cache_data.clear()
             st.success("Base de datos actualizada correctamente.")
@@ -173,7 +173,7 @@ def main():
     df = load_data()
     model = load_model()
 
-    st.markdown("<h3 style='color: #001d57;'>↻ Filtros Iniciales</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: #ffffff;'>↻ Filtros Iniciales</h3>", unsafe_allow_html=True)
     comunidades_seleccionadas = st.multiselect(
         "Seleccione el tipo de población beneficiaria:",
 
@@ -201,7 +201,7 @@ def main():
     ong_names = df_filtrado['Nombre de la Iniciativa/Organización'].tolist()
     embeddings = model.encode(combined_texts, convert_to_tensor=True)
 
-    st.markdown("<h3 style='color: #001d57;'>🔍 Buscar ONGs</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 style='color: #ffffff;'>🔍 Buscar ONGs</h3>", unsafe_allow_html=True)
     description = st.text_area("Describe lo que buscas:", placeholder="ONG que trabaje con niños con cancer.")
 
     top_n = st.number_input(
@@ -235,7 +235,7 @@ def main():
                     Aporte_Crecimiento=ong_data['¿Cómo puedes aportar al crecimiento de la red OLI? (max 50 palabras)']
                     
                     card_content = f"""
-                    <div style="background-color:#f9f9f9;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ddd; border-left: 5px solid transparent; background-image: linear-gradient(to right, #001d57 5px, #f9f9f9 5px);">
+                    <div style="background-color:#4faf34;padding:10px;margin-bottom:10px;border-radius:5px;border:1px solid #ddd; border-left: 5px solid transparent; background-image: linear-gradient(to right, #001d57 5px, #f9f9f9 5px);">
                         <strong style='color:#001d57;'>🏢 ONG:</strong> {ong['ONG']}<br>
                         <strong style='color:#001d57;'>📊 Puntaje:</strong> {ong['Score']:.4f}<br>
                     """
