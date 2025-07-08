@@ -164,7 +164,7 @@ def main():
 
     
     with st.sidebar:
-        st.image("Assets/LOGO_Oli.png", use_container_width=True)
+        st.image("Assets/ser_maestro.png", use_container_width=True)
         st.markdown("<h2 style='color: #001d57';'>↻ Configuración</h2>", unsafe_allow_html=True)
         if st.button("Actualizar Base de Datos"):
             st.cache_data.clear()
