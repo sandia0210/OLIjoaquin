@@ -103,10 +103,7 @@ def main():
     st.markdown(
         """
         <style>
-            body {
-                background-color: #4faf34; /* Verde claro */
-            }
-      
+           
             .stButton>button {
                 background-color: #1071b8; 
                 color: white; 
@@ -162,7 +159,18 @@ def main():
 
     # Aplicar los estilos en la app
     st.markdown(sidebar_style, unsafe_allow_html=True)
-    
+
+    page_bg_style = """
+    <style>
+        .stApp {
+            background-color: #4faf34;
+        }
+    </style>
+    """
+    st.markdown(page_bg_style, unsafe_allow_html=True)
+
+
+
     st.markdown("<h1 style='color: #ffffff';'>Buscador de ONGs Relevantes</h1>", unsafe_allow_html=True)
     st.markdown("<p style='color: #ffffff';'>Encuentra las organizaciones más relevantes según tus necesidades.</p>", unsafe_allow_html=True)
 
