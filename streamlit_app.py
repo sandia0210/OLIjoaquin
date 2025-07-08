@@ -6,7 +6,7 @@ import re
 import io
 
 # Configuración de la página
-st.set_page_config(page_title="Buscador de ONGs", page_icon="🌍", layout="wide")
+st.set_page_config(page_title="Buscador de ONGs", page_icon="🌍" , layout="wide")
 
 # Función para cargar datos desde Google Sheets
 @st.cache_data
@@ -103,6 +103,10 @@ def main():
     st.markdown(
         """
         <style>
+            body {
+                background-color: #4faf34; /* Verde claro */
+            }
+      
             .stButton>button {
                 background-color: #1071b8; 
                 color: white; 
